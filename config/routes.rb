@@ -25,9 +25,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root "items#top"
     get "/about" => "items#about"
-    get "customers/my_page" => "customers#show"
+    get "customers/my_page" => "customers#show", as: "mypage"
     get "customers/unsubscribe" => "customers#unsubscribe"
-    get "orders/complete"=> "orders#complete"
+    get "orders/thanks" => "orders#thanks", as: "thanks"
     post "orders/confirm" => "orders#confirm"
     patch "customers/withdraw" => "customers#withdraw"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
