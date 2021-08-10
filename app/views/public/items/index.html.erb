@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 mx-2 mx-auto px-0 my-5">
+      <h3 class="bg-light text-center mt-2">商品一覧(全 <%= @items.count %> 件)</h3>
+    </div>
+  </div>
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-md-4 col-sm-12 mb-4 card-deck">
+        <div class="card">
+          <div class="card-img">
+            <%= link_to item_path(item.id) do %>
+              <%= attachment_image_tag item, :image, class: "w-100", height: "200", fallback: "no-image.png" %>
+            <% end %>
+          </div>
+          <div class="card-body pl-3">
+            <p><strong><%= item.name %></strong></p>
+            <p>
+              <%= item.add_tax_price.to_s(:delimited) %> 円
+              <% if item.is_active %>
+                <span class="text-success">販売中</span>
+              <% else %>
+                <span class="text-muted">販売停止中</span>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
