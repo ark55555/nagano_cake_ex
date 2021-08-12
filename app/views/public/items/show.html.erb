@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 mx-2 mx-auto px-0 my-5">
+      <%= attachment_image_tag @item, :image, fallback: "no-image.png", class: "w-100" %>
+    </div>
+    <div class="col-sm-6 mx-auto px-0 my-5">
+      <h4><%= @item.name %></h4>
+      <p class="my-3"><%= @item.caption %></p>
+      <p class="my-3">
+        ¥ <strong><%= @item.add_tax_price.to_s(:delimited) %></strong><small>(税込)</small>
+      </p>
+      <!--% if customer_signed_in? %>-->
+        <% if @item.is_active? %>
+          <%= form_with model: @cart_item, local: true do |f| %>
+            <p><small>数量を選択して下さい</small></p>
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.select :amount, [*(1..10)], {selected: 1}, class: "w-25" %>
+            <%= f.submit "カートに入れる", class: "btn btn-info btn-sm ml-3" %>
+          <% end %>
+        <% else %>
+          <p class="text-muted">こちらの商品は、現在販売停止中です。</p>
+        <% end %>
+      <!--% else %>-->
+        <!--<p><strong>⚠購入するには<u>ログイン</u>が必要です。</strong></p>-->
+      <!--% end %>-->
+
+    </div>
+  </div>
+</div>
