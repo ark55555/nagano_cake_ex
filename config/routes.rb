@@ -32,8 +32,10 @@ Rails.application.routes.draw do
     patch "customers/withdraw" => "customers#withdraw"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     resource :customers, only: [ :edit, :update]
-    resources :items, only: [:index, :show]
-    resources :cart_items, only: [:index, :create, :update, :destroy]
+    resources :items, only: [:index, :show] do
+      resources :cart_items, only: [:create, :update, :destroy]
+    end
+    resources :cart_items, only: [:index]
     resources :orders, only: [:new, :create, :index, :show]
     resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
     # get "search" => "searches#search"
