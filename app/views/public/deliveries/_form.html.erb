@@ -1,0 +1,15 @@
+<%= form_with model: @delivery, url: deliveries_path, local: true do |f| %>
+  <div class="field">
+    <%= f.label :postcode, "郵便番号(ハイフンなし)", class: "col-3" %>
+    <%= f.text_field :postcode, placeholder: "0000000", class: "col-2" %>
+  </div>
+  <div class="field">
+    <%= f.label :destination, "住所", class: "col-3" %>
+    <%= f.text_field :destination, placeholder: "東京都渋谷区代々木神園町0-0", class: "col-6" %>
+  </div>
+  <div class="field">
+    <%= f.label :name, "宛名", class: "col-3" %>
+    <%= f.text_field :name, placeholder: "令和道子", class: "col-3" %>
+    <%= f.submit submit, class: "btn btn-primary btn-sm float-right mr-3" %>
+  </div>
+<% end %>
