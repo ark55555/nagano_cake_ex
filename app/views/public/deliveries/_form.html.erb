@@ -1,4 +1,4 @@
-<%= form_with model: @delivery, url: deliveries_path, local: true do |f| %>
+<%= form_with model: delivery, local:true do |f| %>
   <div class="field">
     <%= f.label :postcode, "郵便番号(ハイフンなし)", class: "col-3" %>
     <%= f.text_field :postcode, placeholder: "0000000", class: "col-2" %>
