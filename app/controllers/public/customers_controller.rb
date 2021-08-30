@@ -19,14 +19,17 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
+    @customer.update(is_active: false)
+    reset_session
+    redirect_to root_path, notice: '退会処理が完了しました。またのご利用を心よりお待ちしております！'
   end
-  
+
   private
-  
+
   def set_current_customer
     @customer = current_customer
   end
-  
+
   def customer_params
     params.require(:customer).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :email, :postcode, :address, :phone_number)
   end
