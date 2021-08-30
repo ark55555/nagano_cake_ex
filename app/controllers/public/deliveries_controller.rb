@@ -18,7 +18,6 @@ class Public::DeliveriesController < ApplicationController
   end
 
   def edit
-
   end
 
   def update

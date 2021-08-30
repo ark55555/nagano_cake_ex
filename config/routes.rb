@@ -26,12 +26,14 @@ Rails.application.routes.draw do
     root "items#top"
     get "/about" => "items#about"
     get "customers/my_page" => "customers#show", as: "mypage"
+    get 'customers/information/edit' => 'customers#edit', as: 'edit_information'
+    patch 'customers/information' => 'customers#update', as: 'update_information'
+    put 'customers/information' => 'customers#update'
     get "customers/unsubscribe" => "customers#unsubscribe"
     get "orders/thanks" => "orders#thanks", as: "thanks"
     post "orders/confirm" => "orders#confirm"
     patch "customers/withdraw" => "customers#withdraw"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
-    resource :customers, only: [ :edit, :update]
     resources :items, only: [:index, :show] do
       resources :cart_items, only: [:create, :update, :destroy]
     end
