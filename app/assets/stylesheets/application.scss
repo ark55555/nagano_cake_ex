@@ -14,3 +14,13 @@
  *= require_self
  */
  @import "bootstrap";
+
+ .jumbotron {
+  background-image: url("top-mv.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  p {
+   width: 100%;
+   background: rgba(200, 200, 200, 0.5);
+  }
+}
