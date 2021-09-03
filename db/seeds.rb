@@ -7,5 +7,44 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create!(
-    email: "admin@aaa",
-    password: "aaaaaa")
+  email: "admin@aaa",
+  password: "aaaaaa")
+
+Genre.create!(
+  [
+    {name: "ケーキ"},
+    {name: "焼き菓子"},
+    {name: "プリン"},
+    {name: "和菓子"},
+    {name: "アイス"},
+  ])
+
+for i in 1..3 do
+  Item.create!(
+    [
+      {
+        genre_id: 1,
+        name: "ケーキ#{i}",
+        caption: "#{3*i-2}番目の商品です。",
+        price: rand(1..10) * 100,
+        image: File.open("./app/assets/images/cake#{i}.jpg"),
+        is_active: true
+      },
+      {
+        genre_id: 2,
+        name: "クッキー#{i}",
+        caption: "#{3*i-1}番目の商品です。",
+        price: rand(1..10) * 200,
+        image: File.open("./app/assets/images/cookies#{i}.jpg"),
+        is_active: true
+      },
+      {
+        genre_id: 3,
+        name: "プリン#{i}",
+        caption: "#{3*i}番目の商品です。",
+        price: rand(1..10) * 300,
+        image: File.open("./app/assets/images/pudding#{i}.jpg"),
+        is_active: true
+      }
+    ])
+end
