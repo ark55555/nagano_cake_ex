@@ -13,7 +13,7 @@
         <tbody>
           <tr>
             <th>購入者</th>
-            <td><%= link_to @order.customer.full_name, admin_customer_path(@customer) %></td>
+            <td><%= link_to @order.customer.full_name, admin_customer_path(@order.customer) %></td>
           </tr>
           <tr>
             <th>注文日</th>
@@ -33,7 +33,7 @@
           <tr>
             <th>注文ステータス</th>
             <td>
-              <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+              <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
                 <%= f.select :status, Order.statuses.keys %>
                 <%= f.submit "更新", class: "btn btn-sm btn-success" %>
               <% end %>
@@ -56,14 +56,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @order.order_items.each do |order_item| %>
+          <% @order_items.each do |order_item| %>
           <tr>
             <td><%= order_item.item.name %></td>
             <td><%= order_item.price.to_s(:delimited) %></td>
             <td><%= order_item.amount %></td>
             <td><%= order_item.subtotal.to_s(:delimited) %></td>
             <td>
-              <%= form_with model: order_item, url: admin_order_order_item_path(order_item), method: :patch, local: true do |f| %>
+              <%= form_with model: order_item, url: admin_order_order_item_path(order_id: @order.id, id: order_item.id), method: :patch, local: true do |f| %>
                 <%= f.select :making_status, OrderItem.making_statuses.keys %>
                 <%= f.submit "更新", class: "btn btn-sm btn-success" %>
               <% end %>
