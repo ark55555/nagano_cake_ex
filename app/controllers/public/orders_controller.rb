@@ -12,7 +12,6 @@ class Public::OrdersController < ApplicationController
       @order.delivery_postcode = current_customer.postcode
       @order.delivery_name = current_customer.full_name
     elsif params[:order][:select_address] == '1'
-
       @selected_address =  current_customer.deliveries.find(params[:order][:delivery_id])
       @order.delivery_address = @selected_address.destination
       @order.delivery_postcode = @selected_address.postcode
