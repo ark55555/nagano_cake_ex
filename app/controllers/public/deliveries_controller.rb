@@ -1,4 +1,5 @@
 class Public::DeliveriesController < ApplicationController
+  before_action :authenticate_customer!
   before_action :set_delivery, only: [:edit, :update, :destroy]
 
   def index
