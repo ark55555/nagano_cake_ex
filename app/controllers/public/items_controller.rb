@@ -6,7 +6,13 @@ class Public::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @genres = Genre.all
+    if params[:genre_id]
+      @genre = @genres.find(params[:genre_id])
+      @items = @genre.items.all
+    else
+      @items = Item.all
+    end
   end
 
   def about
