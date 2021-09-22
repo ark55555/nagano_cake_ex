@@ -13,13 +13,13 @@ Rails.application.routes.draw do
   namespace :admin do
     # adminログイン後遷移ページ
     root :to => "orders#index"
+    get "/search" => "orders#search"
     resources :customers, only: [:index, :show, :edit, :update]
     resources :items, except: [:destroy]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :orders, only: [:show, :update] do
       resources :order_items, only: [:update]
     end
-    # get "search" => "searches#search"
   end
 
   scope module: :public do
