@@ -31,4 +31,8 @@ class Customer < ApplicationRecord
     cart_items.find_by(item_id: item.id)
   end
   
+  def self.customer_search(keyword)
+    Customer.where(['last_name LIKE ? OR first_name LIKE ? OR last_name_kana LIKE ? OR first_name_kana LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])
+  end
+  
 end

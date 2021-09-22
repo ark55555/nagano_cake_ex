@@ -19,8 +19,11 @@ class Admin::OrdersController < ApplicationController
       render :show
     end
   end
-  
+
   def search
+    @keyword = params[:keyword]
+    @customers = Customer.customer_search(params[:keyword])
+    @items = Item.item_search(params[:keyword])
   end
 
   private
