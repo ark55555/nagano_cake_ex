@@ -2,32 +2,7 @@
   <h3 class="bg-light text-center mt-2">会員一覧</h3>
   <div class="row my-4">
     <div class="offset-sm-1 col-sm-10">
-      <table class="table table-bordered">
-        <thead class="thead-light">
-          <tr>
-            <th class="col-sm-2 mx-auto">会員ID</th>
-            <th class="col-sm-3">氏名</th>
-            <th class="col-sm-3">メールアドレス</th>
-            <th class="col-sm-2">ステータス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @customers.each do |customer| %>
-            <tr>
-              <td><%= customer.id %></td>
-              <td><%= link_to customer.full_name, admin_customer_path(customer) %></td>
-              <td><%= customer.email %></td>
-              <td>
-                <% if customer.is_active? %>
-                  <span class="text-success">有効</span>
-                <% else %>
-                  <span class="text-muted">退会</span>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'index', customers: @customers %>
     </div>
   </div>
 </div>
