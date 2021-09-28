@@ -9,9 +9,10 @@ class Public::ItemsController < ApplicationController
     @genres = Genre.all
     if params[:genre_id]
       @genre = @genres.find(params[:genre_id])
-      @items = @genre.items.all
+      @items = @genre.items.page(params[:page]).per(8)
     else
-      @items = Item.all
+      # @items = Item.all
+      @items = Item.page(params[:page]).per(8)
     end
   end
 

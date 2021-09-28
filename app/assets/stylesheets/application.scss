@@ -18,7 +18,7 @@
  @import 'font-awesome';
 
  body {
-  font-family: "Courier", "Meiryo", 'ヒラギノ角ゴ ProN W3', "sans-serif";
+  font-family: "Hannotate SC", "Courier", "Meiryo", 'ヒラギノ角ゴ ProN W3', "sans-serif";
  }
 
  header {
@@ -88,6 +88,10 @@
    &:hover{
      background    : #E08E79;               /* フォーカス時の背景色  */
    }
+ }
+ 
+ .pagination{
+  justify-content: center;
  }
 
  footer {

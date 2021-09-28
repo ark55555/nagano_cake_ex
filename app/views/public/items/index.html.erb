@@ -22,12 +22,12 @@
       <% else %>
         <h3 class="bg-light text-center">商品一覧(全 <%= @items.count %> 件)</h3>
       <% end %>
-      <div class="row">
+      <div class="row my-3 mx-auto">
         <% if @items.empty? %>
           <h5 class="my-3 mx-auto">該当する商品はありません</h5>
         <% else %>
           <% @items.each do |item| %>
-            <div class="col-md-3 col-sm-12 mb-4 card-deck mx-auto">
+            <div class="col-md-3 col-sm-12 mb-4 card-deck">
               <div class="card">
                 <div class="card-img">
                   <%= link_to item_path(item.id) do %>
@@ -50,6 +50,7 @@
           <% end %>
         <% end %>
       </div>
+      <%= paginate(@items) %>
     </div>
   </div>
 </div>
