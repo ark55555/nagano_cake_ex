@@ -10,7 +10,7 @@ class Public::CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to mypage_path, notice: '会員情報を更新しました'
+      redirect_to mypage_path, flash: {info: '会員情報を更新しました'}
     else
       render :edit
     end
@@ -22,7 +22,7 @@ class Public::CustomersController < ApplicationController
   def withdraw
     @customer.update(is_active: false)
     reset_session
-    redirect_to root_path, notice: '退会処理が完了しました。またのご利用を心よりお待ちしております！'
+    redirect_to root_path, flash: {success: '退会処理が完了しました。またのご利用を心よりお待ちしております！'}
   end
 
   private

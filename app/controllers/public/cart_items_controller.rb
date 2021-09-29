@@ -15,7 +15,7 @@ class Public::CartItemsController < ApplicationController
       @cart_item = current_customer.cart_items.new(cart_item_params)
       @cart_item.item_id = @item.id
       if @cart_item.save
-        redirect_to cart_items_path, notice: 'カートに商品が追加されました'
+        redirect_to cart_items_path, flash: {info: 'カートに商品が追加されました'}
       else
         render 'public/items/show'
       end
@@ -24,17 +24,17 @@ class Public::CartItemsController < ApplicationController
 
   def update
     @cart_item.update(cart_item_params)
-    redirect_to cart_items_path, notice: '商品数量変更完了しました'
+    redirect_to cart_items_path, flash: {info: '商品数量変更完了しました'}
   end
 
   def destroy
     @cart_item.destroy
-    redirect_to cart_items_path, notice: '削除しました'
+    redirect_to cart_items_path, flash: {warning: '削除しました'}
   end
 
   def destroy_all
     current_customer.cart_items.destroy_all
-    redirect_to cart_items_path, notice: 'カート内商品を全て削除しました'
+    redirect_to cart_items_path, flash: {secondary: 'カート内商品を全て削除しました'}
   end
 
   private

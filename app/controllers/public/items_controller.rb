@@ -11,7 +11,6 @@ class Public::ItemsController < ApplicationController
       @genre = @genres.find(params[:genre_id])
       @items = @genre.items.page(params[:page]).per(8)
     else
-      # @items = Item.all
       @items = Item.page(params[:page]).per(8)
     end
   end
