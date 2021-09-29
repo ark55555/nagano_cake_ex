@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get "customers/unsubscribe" => "customers#unsubscribe"
     get "orders/thanks" => "orders#thanks", as: "thanks"
     post "orders/confirm" => "orders#confirm"
+    get "orders/confirm" => "orders#error"
     patch "customers/withdraw" => "customers#withdraw"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
     resources :items, only: [:index, :show] do

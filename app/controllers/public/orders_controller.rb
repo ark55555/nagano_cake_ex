@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :ensure_cart_items, only: [:new, :confirm, :create]
 
   def new
     @order = Order.new
@@ -28,6 +29,9 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all
     @order.shipping_cost = 800
 
+  end
+  
+  def error
   end
 
   def create
@@ -65,6 +69,13 @@ class Public::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:delivery_name, :delivery_postcode, :delivery_address, :payment_method)
+  end
+
+  def ensure_cart_items
+    @cart_items = current_customer.cart_items.includes(:item)
+    if @cart_items.empty?
+      redirect_to items_path, flash: {danger: 'カートに商品を入れてください'}
+    end
   end
 
 end
