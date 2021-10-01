@@ -4,33 +4,25 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @order.customer_id = current_customer.id
   end
 
   def confirm
     @order = Order.new(order_params)
     if params[:order][:select_address] == '0'
-      @order.delivery_address = current_customer.address
-      @order.delivery_postcode = current_customer.postcode
-      @order.delivery_name = current_customer.full_name
+      @order.get_shipping_info(current_customer)
     elsif params[:order][:select_address] == '1'
-      @selected_address =  current_customer.deliveries.find(params[:order][:delivery_id])
-      @order.delivery_address = @selected_address.destination
-      @order.delivery_postcode = @selected_address.postcode
-      @order.delivery_name = @selected_address.name
-    elsif params[:order][:select_address] == '2'
+      @selected_address = current_customer.deliveries.find(params[:order][:delivery_id])
+      @order.get_shipping_info(@selected_address)
+    elsif params[:order][:select_address] == '2' && @order.delivery_address? && (@order.delivery_postcode =~ /\A\d{7}\z/) && @order.delivery_name?
       @order.delivery_address = params[:order][:delivery_address]
       @order.delivery_postcode = params[:order][:delivery_postcode]
       @order.delivery_name = params[:order][:delivery_name]
     else
-      flash[:error] = '情報を正しく入力して下さい。'
-      render :new
+      flash[:warning] = '情報を正しく入力して下さい。'
+      redirect_to new_order_path
     end
-    @cart_items = current_customer.cart_items.all
-    @order.shipping_cost = 800
-
   end
-  
+
   def error
   end
 

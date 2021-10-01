@@ -25,15 +25,17 @@
             <br><%= current_customer.full_name %>
           </div>
         </div>
-        <div class="form_select_address mb-3">
-          <div class="col-sm-4">
-            <%= f.radio_button :select_address, 1 %>
-            <%= f.label :select_address, "登録済住所から選択" %>
+        <%   if current_customer.deliveries.present? %>
+          <div class="form_select_address mb-3">
+            <div class="col-sm-4">
+              <%= f.radio_button :select_address, 1 %>
+              <%= f.label :select_address, "登録済住所から選択" %>
+            </div>
+            <div class="col-sm-8 ml-3">
+              <%= f.collection_select :delivery_id, current_customer.deliveries, :id, :full_address %>
+            </div>
           </div>
-          <div class="col-sm-8 ml-3">
-            <%= f.collection_select :delivery_id, current_customer.deliveries, :id, :full_address, prompt: "--選択してください--" %>
-          </div>
-        </div>
+        <% end %>
         <div class="form_select_address">
           <div class="col-sm-4">
             <%= f.radio_button :select_address, 2 %>

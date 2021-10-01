@@ -20,4 +20,17 @@ class Order < ApplicationRecord
    end
  end
 
+ def get_shipping_info(resource)
+   class_name = resource.class.name
+   if class_name == 'Customer'
+     self.delivery_address = resource.address
+     self.delivery_postcode = resource.postcode
+     self.delivery_name = resource.full_name
+   elsif class_name == 'Delivery'
+     self.delivery_address = resource.destination
+     self.delivery_postcode = resource.postcode
+     self.delivery_name = resource.name
+   end
+ end
+
 end
